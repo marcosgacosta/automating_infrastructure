@@ -32,7 +32,7 @@ So, we need a Terraform File that deploys:
 ##EC2 Instance (webserver-apache)
 
 Next, let us create the EC2 Instance with the assigned name, using the AMI Amazon Linux 2023, and create it inside our subnet, our security group and commanding it to run the script that will run Apache Webserver.
-*
+```
 resource "aws_instance" "webserver-apache" {
   ami           = "ami-0230bd60aa48260c6" # AMI Amazon Linux 2023
   instance_type = "t2.micro"
@@ -42,11 +42,11 @@ resource "aws_instance" "webserver-apache" {
   subnet_id                   = aws_subnet.public-subnet.id
   user_data                   = "${file("create_apache.sh")}"
 }
-*
+```
 ##VPC (custom-vpc)
 
 The VPC will use the range 192.168.0.0/16:
-*
+```
 resource "aws_vpc" "custom-vpc" {
   cidr_block = "192.168.0.0/16"
 
@@ -54,7 +54,7 @@ resource "aws_vpc" "custom-vpc" {
     Name = "apache-vpc"
   }
 }
-*
+```
 
 
 resource "aws_subnet" "my_subnet" {
