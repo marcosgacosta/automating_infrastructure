@@ -19,6 +19,7 @@ DynamoDB y S3 serán utilizados para conservar los archivos Terraform State lo c
 
 El siguiente diagrama muestra lo que sería el resultado de correr el Terraform File (main.tf):
 
+![Diagrama mostrando el resultado de _main.tf_.](/assets/diagrams/MainTFDiagram.png)
 
 
 
