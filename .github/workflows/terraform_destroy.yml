@@ -32,4 +32,4 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       
     - name: Terraform destroy
-        run: terraform destroy -auto-approve
+      run: terraform destroy -auto-approve
