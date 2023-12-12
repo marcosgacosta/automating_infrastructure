@@ -11,5 +11,4 @@ jobs:
       AWS_REGION: 'us-east-1'
    steps:
      - name: Terraform destroy
-       id: destroy
-       run: terraform destroy --auto-approved
+       run: terraform destroy -auto-approve
