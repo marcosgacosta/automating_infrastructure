@@ -6,7 +6,6 @@ The goal of this Integrative Project is to integrate the following technologies 
 1. GitHub Actions
 2. Apache
 3. Amazon Web Services
-    - DynamoDB
     - EC2
     - S3
 5. Terraform
@@ -226,4 +225,6 @@ jobs:
        run: terraform destroy -auto-approved
 ```       
 
+## Conclusion
+So now we have automated our infrastructure. We can make changes in our Terraform files, commit them and GitHub Actions will automatically update our infrastructure to match our new file.
 
