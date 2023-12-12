@@ -13,7 +13,7 @@ The goal of this Integrative Project is to integrate the following technologies 
 
 This is project is for didactic purposes ony so it is important to recognize that many improvements could be made to this implementation but are beyond the scope.
 
-#First Step: Create the Terraform Files
+# First Step: Create the Terraform Files
 The following diagram shows the expected output of our Terraform implementation (main.tf):
 
 ![Output of _main.tf_.](/assets/diagrams/MainTFDiagram.png)
@@ -29,7 +29,7 @@ So, we need a Terraform File that deploys:
 6. Security Group (apache-security)
 
 
-##EC2 Instance (webserver-apache)
+## EC2 Instance (webserver-apache)
 
 Next, let us create the EC2 Instance with the assigned name, using the AMI Amazon Linux 2023, and create it inside our subnet, our security group and commanding it to run the script that will run Apache Webserver.
 ```
@@ -43,7 +43,7 @@ resource "aws_instance" "webserver-apache" {
   user_data                   = "${file("create_apache.sh")}"
 }
 ```
-##VPC (custom-vpc)
+## VPC (custom-vpc)
 
 The VPC will use the range 192.168.0.0/16:
 ```
