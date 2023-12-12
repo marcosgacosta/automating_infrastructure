@@ -160,7 +160,7 @@ If we write that IP in our web browser we can see our Apache Server fully functi
 To ensure that our Terraform Statefile is secure and have consistency, we are going to set up a remote backend. For this we need to create an S3 Bucket. We create the bucket using the GUI and we call it *mundose-pin-test1337*.
 
 There is a possibility to lock the statefile using DynamoDB if we are part of the team. Since it is not our case today, we will not implement it but it is strongly recommended. So we create backend.tf with the following code.: 
-
+```
 terraform {
   backend "s3"{
     bucket = "mundose-pin-test1337"
@@ -168,9 +168,31 @@ terraform {
     region = "us-east-1"
   }
 }
-
+```
 Now, everytime we update our infrastructure the Terraform statefile will be stored in the S3 bucket.
 
 # GitHub Actions
-The following step is to setup GitHub Actions so we can automate the deployment of our infrastructure. To do this we use the Template provided by GitHub Actions.
+The following step is to setup GitHub Actions so we can automate the deployment of our infrastructure. To do this we use the Template provided by GitHub Actions with some modifications.
+By default, the Terraform template from GitHub Actions includes the following line:
+```
+if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
+```
+If we want to automate it so changes in our files update our infrastructure, we can use that. But since we are just testing, we are going to comment that line.
+
+#Secret Keys
+To be able to execute commands in Terraform and in AWS we need to add the following line when we run Terraform init or Apply.
+```
+ env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+```
+
+To be able to install Terraform on the GitHub Actions enviromnent we also need to set up the secret key *TF_API_TOKEN*.
+
+So these are the three secret keys we need to configure in our repository:
+1. AWS_ACCESS_KEY_ID
+2. WS_SECRET_ACCESS_KEY
+3. TF_API_TOKEN
+
+
 
