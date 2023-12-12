@@ -127,3 +127,29 @@ resource "aws_security_group" "apache_security" {
 }
 ```
 
+## Region and Provider
+To allow our Terraform to work, we need to use all this code and specify our region and our provider:
+```
+provider "aws" {
+  region = "us-east-1"
+}
+```
+
+## Output EC2 Instance Public IP
+We want to check if the instance is working, so to do that we are going to ask Terraform to provide us the public IP of the Instance:
+```
+output "WebServer_Apache_IP" {
+  value = aws_instance.webserver_apache.public_ip
+}
+```
+
+All this is what we can see in main.tf. If we run it. It gives us a fully functioning EC2 Instance running Apache.
+
+If we run *terraform apply --auto-approve* we have the following output:
+
+![terraform apply Output.](/assets/diagrams/terraform_output.png)
+
+If we write that IP in our web browser we can see our Apache Server fully functioning:
+
+![terraform apply Output.](/assets/diagrams/apache_output.png)
+

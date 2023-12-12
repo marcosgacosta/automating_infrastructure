@@ -3,3 +3,4 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform/providers/registry.terraform.io/hashicorp/aws/5.30.0/darwin_amd64/terraform-provider-aws_v5.30.0_x5
 A4L.pem
+assets/diagrams/PIN2_Diagrams.drawio

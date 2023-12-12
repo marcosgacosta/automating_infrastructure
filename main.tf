@@ -73,3 +73,7 @@ resource "aws_security_group" "apache_security" {
     ipv6_cidr_blocks = ["::/0"]
   }
 }
+
+output "WebServer_Apache_IP" {
+  value = aws_instance.webserver_apache.public_ip
+}
