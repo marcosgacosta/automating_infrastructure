@@ -143,6 +143,7 @@ output "WebServer_Apache_IP" {
 }
 ```
 
+## Results
 All this is what we can see in main.tf. If we run it. It gives us a fully functioning EC2 Instance running Apache.
 
 If we run *terraform apply --auto-approve* we have the following output:
@@ -152,4 +153,24 @@ If we run *terraform apply --auto-approve* we have the following output:
 If we write that IP in our web browser we can see our Apache Server fully functioning:
 
 ![terraform apply Output.](/assets/diagrams/apache_output.png)
+
+
+
+# Terraform Backend
+To ensure that our Terraform Statefile is secure and have consistency, we are going to set up a remote backend. For this we need to create an S3 Bucket. We create the bucket using the GUI and we call it *mundose-pin-test1337*.
+
+There is a possibility to lock the statefile using DynamoDB if we are part of the team. Since it is not our case today, we will not implement it but it is strongly recommended. So we create backend.tf with the following code.: 
+
+terraform {
+  backend "s3"{
+    bucket = "mundose-pin-test1337"
+    key    = "terraform/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+Now, everytime we update our infrastructure the Terraform statefile will be stored in the S3 bucket.
+
+# GitHub Actions
+The following step is to setup GitHub Actions so we can automate the deployment of our infrastructure. To do this we use the Template provided by GitHub Actions.
 
