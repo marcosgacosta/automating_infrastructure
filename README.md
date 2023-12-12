@@ -159,6 +159,8 @@ If we write that IP in our web browser we can see our Apache Server fully functi
 # Terraform Backend
 To ensure that our Terraform Statefile is secure and have consistency, we are going to set up a remote backend. For this we need to create an S3 Bucket. We create the bucket using the GUI and we call it *mundose-pin-test1337*.
 
+![S3 Bucket created.](/assets/diagrams/s3bucket.png)
+
 There is a possibility to lock the statefile using DynamoDB if we are part of the team. Since it is not our case today, we will not implement it but it is strongly recommended. So we create backend.tf with the following code.: 
 ```
 terraform {
@@ -179,7 +181,7 @@ if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
 ```
 If we want to automate it so changes in our files update our infrastructure, we can use that. But since we are just testing, we are going to comment that line.
 
-#Secret Keys
+## Secret Keys
 To be able to execute commands in Terraform and in AWS we need to add the following line when we run Terraform init or Apply.
 ```
  env:
@@ -194,5 +196,34 @@ So these are the three secret keys we need to configure in our repository:
 2. WS_SECRET_ACCESS_KEY
 3. TF_API_TOKEN
 
+After setting up those variables, we can run our Action and we can see the result:
+
+![Actions output.](/assets/diagrams/actions1.png)
+
+![Actions output.](/assets/diagrams/actions2.png)
+
+Inside the step Terraform Apply we can find our Webserver IP Address and if we paste it on our Web Browser we have the following:
+
+![Webserver running after GitHub Action.](/assets/diagrams/apache_output2.png)
+
+## Terraform Destroy
+Since we are practicing, we want to be able to remove our infrastructure. For this we create the following *terraform_destroy.yml* where we set it up to run manually when we want (workflow_dispatch):
+```
+name: Terraform Destroy
+on:
+ workflow_dispatch:
+
+jobs:
+ terraform-destroy:
+   runs-on: ubuntu-latest
+   env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'us-east-1'
+   steps:
+     - name: Terraform destroy
+       id: destroy
+       run: terraform destroy -auto-approved
+```       
 
 
