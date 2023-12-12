@@ -17,6 +17,8 @@ El objetivo es didáctico por lo que el enfoque es limitado y un caso de uso rea
 
 DynamoDB y S3 serán utilizados para conservar los archivos Terraform State lo cual permite la colaboración de múltiples usuarios sobre la misma infraestructura. Pero eso será implementado más adelante. Primero generaremos el archivo que va a crear la instancia EC2 y los requerimientos de red necesarios para que funcione.
 
+El siguiente diagrama muestra lo que sería el resultado de correr el Terraform File (main.tf):
+
 
 
 
