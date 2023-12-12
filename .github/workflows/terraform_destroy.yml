@@ -4,7 +4,6 @@ on:
  
 jobs:
   terraform_destroy:
-    name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
 
