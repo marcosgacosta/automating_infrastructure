@@ -10,6 +10,9 @@ The goal of this Integrative Project is to integrate the following technologies 
     - S3
 5. Terraform
 
+The following diagram shows what we are trying to accomplish:
+![Automating AWS Infrastructure using GitHub Actions and Terraform_.](/assets/diagrams/AutoDiagram.png)
+
 This is project is for didactic purposes ony so it is important to recognize that many improvements could be made to this implementation but are beyond the scope.
 
 # First Step: Create the Terraform Files
@@ -225,6 +228,6 @@ jobs:
        run: terraform destroy -auto-approved
 ```       
 
-## Conclusion
+# Conclusion
 So now we have automated our infrastructure. We can make changes in our Terraform files, commit them and GitHub Actions will automatically update our infrastructure to match our new file.
 
