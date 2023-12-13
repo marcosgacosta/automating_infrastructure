@@ -177,11 +177,6 @@ Now, everytime we update our infrastructure the Terraform statefile will be stor
 
 # GitHub Actions
 The following step is to setup GitHub Actions so we can automate the deployment of our infrastructure. To do this we use the Template provided by GitHub Actions with some modifications.
-By default, the Terraform template from GitHub Actions includes the following line:
-```
-if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-```
-If we want to automate it so changes in our files update our infrastructure, we can use that. But since we are just testing, we are going to comment that line.
 
 ## Secret Keys
 To be able to execute commands in Terraform and in AWS we need to add the following line when we run Terraform init or Apply.
